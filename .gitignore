@@ -1,0 +1,67 @@
+# ==========================================
+# 1. Python & Virtual Environments
+# ==========================================
+# Virtual environments (never push dependencies to Git)
+venv/
+env/
+ENV/
+.venv/
+
+# Python compiled bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging build outputs
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ==========================================
+# 2. Local Database & Log Files
+# ==========================================
+# SQLite database files (keeps user sensor logs private and local)
+*.db
+*.sqlite
+*.sqlite3
+
+# Log files
+*.log
+
+# ==========================================
+# 3. ESP32 & Microcontroller Build Files
+# ==========================================
+# Arduino IDE / PlatformIO build artifacts
+*.elf
+*.bin
+*.hex
+.pio/
+.pioenvs/
+.piolibdeps/
+*.workspace
+
+# ==========================================
+# 4. Environment Variables & Secrets
+# ==========================================
+# API keys, passwords, sensitive Wi-Fi credentials
+.env
+*.env
+secrets.h
+
+# ==========================================
+# 5. Editor & OS Generated Files
+# ==========================================
+# VS Code & JetBrains IDE settings
+.vscode/
+.idea/
+
+# Linux / Fedora temporary swap files
+*.swp
+*.swo
+*~
+
+# macOS / Windows system metadata
+.DS_Store
+Thumbs.db
