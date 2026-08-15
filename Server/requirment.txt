@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+echo "================================================="
+echo "ESP32 Smart Irrigation - System Setup (Fedora)"
+echo "================================================="
+
+# 1. Update system package index and install required packages
+echo "[1/5] Installing system packages (Mosquitto, SQLite, Python3)..."
+sudo dnf install -y mosquitto sqlite python3 python3-pip python3-devel jq
+
+# 2. Grant USB serial permissions for ESP32 flashing
+echo "[2/5] Configuring USB dialout permissions for ESP32 access..."
+sudo usermod -aG dialout $USER
+
+# 3. Configure and start Mosquitto MQTT Broker
+echo "[3/5] Configuring Mosquitto MQTT Broker..."
+if ! grep -q "listener 1883" /etc/mosquitto/mosquitto.conf; then
+    sudo bash -c 'cat <<EOF >> /etc/mosquitto/mosquitto.conf
+
+# Allow remote connections from ESP32
+listener 1883
+allow_anonymous true
+EOF'
+fi
+
+sudo systemctl enable --now mosquitto
+
+# 4. Open Firewall ports for MQTT (1883) and Web Dashboard (5000)
+echo "[4/5] Updating firewalld rules for ports 1883 and 5000..."
+sudo firewall-cmd --add-port=1883/tcp --permanent >/dev/null 2>&1 || true
+sudo firewall-cmd --add-port=5000/tcp --permanent >/dev/null 2>&1 || true
+sudo firewall-cmd --reload >/dev/null 2>&1 || true
+
+# 5. Create Python virtual environment & install requirements
+echo "[5/5] Setting up Python virtual environment..."
+if [ ! -d "venv" ]; then
+    python3 -m venv venv
+fi
+
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r server/requirements.txt
+
+echo "================================================="
+echo "✅ Prerequisites setup complete!"
+echo "Run 'python3 server/server.py' to launch."
+echo "================================================="
