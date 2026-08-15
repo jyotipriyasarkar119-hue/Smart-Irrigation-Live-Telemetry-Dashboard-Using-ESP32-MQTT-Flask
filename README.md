@@ -101,18 +101,48 @@ const int DRY_THRESHOLD   = 30;   // Moisture % threshold below which the pump t
 ```
 ## Repository Structure
 ```
-smart-irrigation-esp32-mqtt/
-├── firmware/
-│   └── esp32_irrigation_node/
-│       └── esp32_irrigation_node.ino   # ESP32 C++ Arduino Sketch
-├── server/
-│   ├── templates/
-│   │   └── index.html                 # Frontend Web Dashboard
-│   ├── server.py                      # Flask + MQTT Consumer + SQLite Backend
-│   └── requirements.txt               # Python Dependencies
-├── .gitignore                         # Prevents uploading venv, DB, secrets
-├── LICENSE                            # Open-source license (MIT)
-└── README.md                          # Project Documentation
+Smart-Irrigation-Live-Telemetry-Dashboard-Using-ESP32-MQTT-Flask/
+│
+├── .gitignore
+├── LICENSE
+├── README.md
+│
+├── Server/
+│   ├── requirment.txt
+│   ├── server.py
+│   └── templates/
+│       └── index.html
+│
+├── assets/
+│   └── screenshots/
+│       └── webhost.png
+│
+├── database/
+│   └──  schema/
+│       └── schema.sql
+│
+├── docs/
+│   ├── architecture/
+│   │   ├──  system-architecture.md
+│   │   ├── data-flow.md
+│   │   ├── database-architecture.md
+│   │   └── mqtt-architecture.md
+│   │
+│   ├── hardware/
+│   │   ├── circuit-diagram.md
+│   │   ├── pinout.md
+│   │   └── sensor-connections.md
+│   │
+│   └── setup/
+│       ├── database-setup.md
+│       ├── deployment.md
+│       ├── installation.md
+│       └── mqtt-setup.md
+│
+└── firmware/
+    └── esp32_irrigation_node/
+        ├── README.md
+        └── esp32_irrigation_node.ino
 ```
 ## Possible Improvements
 
